@@ -22,12 +22,14 @@ boundaryField
 {
     symmetryX
     {
-        type            symmetry;
+        type            cyclic;
+		neighbourPatch	symmetryY;
     }
 	
 	symmetryY
 	{
-		type			symmetry;
+		type			cyclic;
+		neighbourPatch	symmetryX;
 	}
 
 	innerWall

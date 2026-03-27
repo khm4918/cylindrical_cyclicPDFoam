@@ -21,9 +21,9 @@ if showfig:
 r0 = 0.1        # starting radius (mm)
 r_max = 18      # max radius (mm)
 theta_min = 150  # starting theta (deg)
-theta_deg = 60  # wedge angle in degrees
+theta_deg = 180  # wedge angle in degrees
 n_radial = 10000  # radial cells (in excess)
-n_theta = 180    # angular divisions
+n_theta = 30    # angular divisions
 n_axial = 1     # axial divisions
 z_min = 0.0
 z_max = 1.0
@@ -110,9 +110,14 @@ with open("system/blockMeshDict", "w") as f:
 
     # Define boundaries
     f.write("boundary\n(\n")
-    
-    # symmetryPlane along theta = 0
-    f.write("    symmetryX\n    {\n        type symmetry;\n        faces\n        (\n")
+
+    f.write("    symmetryX\n    {\n")
+    f.write("        type cyclic;\n")
+    f.write("        neighbourPatch symmetryY;\n")
+    f.write("        transform rotational;\n")
+    f.write("        rotationAxis (0 0 1);\n")
+    f.write("        rotationCentre (0 0 0);\n")
+    f.write("        faces\n        (\n")
     for i_r in range(n_r):
         v0 = idx(0, 0, i_r)
         v1 = idx(0, 0, i_r+1)
@@ -120,9 +125,14 @@ with open("system/blockMeshDict", "w") as f:
         v3 = idx(1, 0, i_r)
         f.write(f"            ({v0} {v1} {v2} {v3})\n")
     f.write("        );\n    }\n")
-    
-    # symmetryPlane along theta = 90 deg
-    f.write("    symmetryY\n    {\n        type symmetry;\n        faces\n        (\n")
+
+    f.write("    symmetryY\n    {\n")
+    f.write("        type cyclic;\n")
+    f.write("        neighbourPatch symmetryX;\n")
+    f.write("        transform rotational;\n")
+    f.write("        rotationAxis (0 0 1);\n")
+    f.write("        rotationCentre (0 0 0);\n")
+    f.write("        faces\n        (\n")
     for i_r in range(n_r):
         v0 = idx(0, n_theta, i_r)
         v1 = idx(0, n_theta, i_r+1)

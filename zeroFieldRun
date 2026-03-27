@@ -11,7 +11,7 @@ export FOAMTPD_DIR="$HOME/OpenFOAM/threePhaseDensityFoam2D_KM/"
 cd $SCRIPT_DIR
 rm -r 0
 cd $FOAMTPD_DIR
-cp -r base_fields_dimensionless $SCRIPT_DIR/0
+cp -r base_fields_cyclic $SCRIPT_DIR/0
 echo "Replaced 0 folder with base fields"
 
 #update threePhaseDensityFoam2D with new createFields.H template
