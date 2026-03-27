@@ -21,9 +21,9 @@ if showfig:
 r0 = 0.1        # starting radius (mm)
 r_max = 18      # max radius (mm)
 theta_min = 150  # starting theta (deg)
-theta_deg = 180  # wedge angle in degrees
+theta_deg = 60  # wedge angle in degrees
 n_radial = 10000  # radial cells (in excess)
-n_theta = 30    # angular divisions
+n_theta = 180    # angular divisions
 n_axial = 1     # axial divisions
 z_min = 0.0
 z_max = 1.0
